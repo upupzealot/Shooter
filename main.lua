@@ -1,3 +1,5 @@
+require('preload')
+
 local width = love.graphics.getWidth()
 local height = love.graphics.getHeight()
 
