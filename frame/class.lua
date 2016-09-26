@@ -5,7 +5,7 @@ class = function(base, classname, init)
   local c = {}  -- a new class instance
 
   if type(base) == 'table' then
-    -- our new class is a shallow copy of the base class!
+    -- shallow copy of the base class!
     for i, v in pairs(base) do
       c[i] = v
     end
@@ -48,7 +48,13 @@ class = function(base, classname, init)
     return obj
   end
   c.init = init
+
   c._classname = classname or (base and base._classname) or c._classname
+  c._classes = {} or c._classes
+  if c._classname then
+    table.insert(c._classes, c._classname)
+  end
+  
   c.is_a = function (self, klass)
     local m = getmetatable(self)
     while m do
