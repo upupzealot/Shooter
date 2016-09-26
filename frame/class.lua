@@ -1,17 +1,33 @@
--- class.lua
+--------------------
 -- 为Lua提供类、继承等概念
-function class(base, init)
+--------------------
+class = function(base, classname, init)
     local c = {}    -- a new class instance
-    if not init and type(base) == 'function' then
-        init = base
-        base = nil
-    elseif type(base) == 'table' then
+
+    if type(base) == 'table' then
         -- our new class is a shallow copy of the base class!
         for i, v in pairs(base) do
             c[i] = v
         end
-        c._base = base
+
+        if type(classname) == 'function' then
+            init = classname
+            classname = nil
+        else
+            classname = (type(classname) == 'string') and classname
+            init = ((type(init) == 'function') or (type(init) == 'nil')) and init
+        end
+    elseif type(base) == 'string' then
+        init = ((type(classname) == 'function') or (type(classname) == 'nil')) and classname
+        classname = base
+        base = nil
+    elseif type(base) == 'function' then
+        init = base
+        classname = nil
+        base = nil
     end
+
+    c._base = base
     -- the class will be the metatable for all its objects,
     -- and they will look up their methods in it.
     c.__index = c
@@ -32,7 +48,8 @@ function class(base, init)
         return obj
     end
     c.init = init
-    c.is_a = function(self, klass)
+    c._classname = classname or (base and base._classname) or c._classname
+    c.is_a = function (self, klass)
         local m = getmetatable(self)
         while m do
             if m == klass then return true end

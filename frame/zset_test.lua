@@ -1,0 +1,36 @@
+local zs = zset()
+assert(#zs == 0)
+
+zs:add('hehe')
+assert(#zs == 1)
+assert(zs[1] == 'hehe')
+
+zs:add('haha')
+assert(#zs == 2)
+assert(zs[1] == 'hehe')
+assert(zs[2] == 'haha')
+
+zs:add('haha')
+assert(#zs == 2)
+assert(zs[1] == 'hehe')
+assert(zs[2] == 'haha')
+
+zs:add('heihei')
+assert(#zs == 3)
+assert(zs[1] == 'hehe')
+assert(zs[2] == 'haha')
+assert(zs[3] == 'heihei')
+
+zs:remove('haha')
+assert(#zs == 2)
+assert(zs[1] == 'hehe')
+assert(zs[2] == 'heihei')
+assert(zs:indexOf('hehe') == 1)
+assert(zs:indexOf('haha') == nil)
+assert(zs:indexOf('heihei') == 2)
+
+zs:add('haha')
+assert(#zs == 3)
+assert(zs[1] == 'hehe')
+assert(zs[2] == 'heihei')
+assert(zs[3] == 'haha')
