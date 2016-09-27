@@ -16,7 +16,7 @@ love.update = function()
   
   for classname, actors in pairs(World.current.actors) do
     for i, actor in ipairs(actors) do
-      if actor._classname == classname and actor.active then
+      if actor._classname == classname and actor.active and actor.update then
         actor:update()
       end
     end
@@ -24,10 +24,8 @@ love.update = function()
   
   for classname, actors in pairs(World.current.actors) do
     for i, actor in ipairs(actors) do
-      if actor._classname == classname and actor.active then
-        if actor.render then
-          actor:render()
-        end
+      if actor._classname == classname and actor.active and actor.render then
+        actor:render()
       end
     end
   end

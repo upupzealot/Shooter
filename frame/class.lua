@@ -51,6 +51,11 @@ class = function(base, classname, init)
 
   c._classname = classname or (base and base._classname) or c._classname
   c._classes = {} or c._classes
+  if base then
+    for i, classname in ipairs(base._classes) do
+      table.insert(c._classes, classname)
+    end
+  end
   if c._classname then
     table.insert(c._classes, c._classname)
   end
