@@ -1,0 +1,10 @@
+local a = vec2(1, 2)
+local b = vec2(3, 4)
+
+assert(a ~= b)
+assert(a + b == vec2(4, 6))
+assert(a * 2 == vec2(2, 4))
+assert(a * b == 11)
+assert(a / 2 == vec2(0.5, 1))
+assert(a:lenSqr() == 5)
+assert(vec2(3, 4):len() == 5)

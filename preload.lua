@@ -1,4 +1,6 @@
 require('frame/util')
+require('frame/vec2')
+require('frame/vec2_test')
 require('frame/class')
 require('frame/class_test')
 require('frame/zset')
