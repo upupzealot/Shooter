@@ -8,4 +8,7 @@ require('frame/zset_test')
 require('frame/world')
 require('frame/actor')
 require('frame/game_thread')
-require('frame/world_test')
+--require('frame/world_test')
+
+require('game/character')
+require('game/player')

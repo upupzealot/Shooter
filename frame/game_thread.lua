@@ -4,7 +4,7 @@
 love.update = function()
   love.graphics.setBackgroundColor(40, 40, 40)
   love.graphics.setColor(255, 255, 255)
-  love.graphics.setLineWidth(3)
+  love.graphics.setLineWidth(4)
   
   if not World.current then
     return
@@ -21,7 +21,9 @@ love.update = function()
       end
     end
   end
-  
+end
+
+love.draw = function()
   for classname, actors in pairs(World.current.actors) do
     for i, actor in ipairs(actors) do
       if actor._classname == classname and actor.active and actor.render then

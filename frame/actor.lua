@@ -8,7 +8,7 @@ function Actor:init(pos)
   self.id = Actor.UID
   Actor.UID = Actor.UID + 1
   
-  self.pos = pos
+  self.pos = pos:clone()
   self.active = true
 end
 
