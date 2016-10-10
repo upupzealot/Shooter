@@ -9,3 +9,17 @@ printt = function (t)
   end
   print('}')
 end
+
+-- 浅复制
+scopy = function (dst, src)
+  if not src then
+    src = dst
+    dst = {}
+  end
+
+  for k, v in pairs(src) do
+    dst[k] = v
+  end
+
+  return dst
+end
