@@ -1,7 +1,7 @@
 --------------------
 -- 程序主循环
 --------------------
-love.update = function()
+love.update = function(dt)
   love.graphics.setBackgroundColor(40, 40, 40)
   love.graphics.setColor(255, 255, 255)
   love.graphics.setLineWidth(4)
@@ -11,13 +11,13 @@ love.update = function()
   end
   
   if World.current.update then
-    World.current:update()
+    World.current:update(dt)
   end
   
   for classname, actors in pairs(World.current.actors) do
     for i, actor in ipairs(actors) do
       if actor._classname == classname and actor.active and actor.update then
-        actor:update()
+        actor:update(dt)
       end
     end
   end

@@ -12,4 +12,6 @@ require('frame/game_thread')
 
 require('game/character')
 require('game/gun')
+require('game/bullet')
+require('game/GunBullet')
 require('game/player')

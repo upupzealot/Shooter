@@ -1,7 +1,7 @@
 require('preload')
 
-local width = love.graphics.getWidth()
-local height = love.graphics.getHeight()
+WIDTH = love.graphics.getWidth()
+HEIGHT = love.graphics.getHeight()
 
 local world = World()
-world:addActor(Player(vec2(width / 2, height / 2)))
+world:addActor(Player(vec2(WIDTH / 2, HEIGHT / 2)))

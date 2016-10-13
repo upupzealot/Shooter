@@ -1,19 +1,21 @@
 Gun = class('Gun')
 
 local default_option = {
-  cap = 30,       -- 弹夹容量
-  clip = 30,      -- 当前装弹量
-  interval = 1,   -- 射击间隔
-  reload = 1.5,   -- 换弹间隔
-  scattering = 0  -- 准星抖动
+  cap = 30,           -- 弹夹容量
+  clip = 30,          -- 当前装弹量
+  interval = 1,       -- 射击间隔
+  reload = 1.5,       -- 换弹间隔
+  scattering = 0,     -- 准星抖动
+  bullet_speed = 200  --子弹速度
 }
 
 function Gun:init(owner, option)
   self.owner = owner
   
   local opt = scopy(default_option)
-  opt = scopy(opt, option)
+  scopy(opt, option)
   opt.clip = opt.cap
+  scopy(self, opt)
   
   self.pool = {}
   self.can_shoot = true
@@ -80,7 +82,8 @@ function Gun:config(bullet)
 end
 
 function Gun:getBullet()
-  return Bullet(self)
+  --return Bullet(self)
+  return GunBullet(self)
 end
 
 function Gun:recycle(bullet) -- 这里仍需要移动元素，可以优化 --同时还需要从World中移除
