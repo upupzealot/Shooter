@@ -38,7 +38,6 @@ function GunBullet:update(dt)
     or (pos.x > WIDTH and self.tail_pos.x > WIDTH)
     or (pos.y < 0 and self.tail_pos.y < 0)
     or (pos.y > HEIGHT and self.tail_pos.y > HEIGHT) then
-      print(self.world:countActors('GunBullet'))
       self:recycle()
     end
   else
@@ -61,7 +60,7 @@ function GunBullet:update(dt)
 end
 
 function GunBullet:onHit()
-  --self.world:addActor(Explode(self.pos))
+  self.world:addActor(Explode(self.pos))
   self.finished = true
 end
 

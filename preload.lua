@@ -10,6 +10,7 @@ require('frame/actor')
 require('frame/game_thread')
 --require('frame/world_test')
 
+require('game/explode')
 require('game/character')
 require('game/gun')
 require('game/bullet')
