@@ -54,5 +54,6 @@ function World:removeActor(actor)
       local actors = self.actors[classname]
       actors:remove(actor)
     end
+    actor.world = nil
   end
 end
