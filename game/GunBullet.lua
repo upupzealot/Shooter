@@ -34,8 +34,17 @@ function GunBullet:update(dt)
         
         self:hit()
         
-        if pos.x < 0 or pos.x > WIDTH or pos.y < 0 or pos.y > HEIGHT then
-            self:done()
+        if (pos.x < 0 and self.tail_pos.x < 0)
+        or (pos.x > WIDTH and self.tail_pos.x > WIDTH)
+        or (pos.y < 0 and self.tail_pos.y < 0)
+        or (pos.y > HEIGHT and self.tail_pos.y > HEIGHT) then
+            print(self.world:countActors('GunBullet'))
+            self:recycle()
+        end
+    else
+        self.head_alpha = self.head_alpha - (self.v:len() * dt / self.max_length) * 255
+        if self.head_alpha <= 0 then
+            self:recycle()
         end
     end
     
@@ -51,18 +60,9 @@ function GunBullet:update(dt)
     self.tail_alpha = self.head_alpha - dis / self.max_length * 255
 end
 
-
-function GunBullet:done()
-    self.finished = true
-    --tween(1, self, {head_alpha = 0}, tween.easing.linear,
-    --    function()
-        self:recycle()
-    --end)
-end
-
 function GunBullet:onHit()
-    self.world:addActor(Explode(self.pos))
-    self:done()
+    --self.world:addActor(Explode(self.pos))
+    self.finished = true
 end
 
 function GunBullet:getVertices()

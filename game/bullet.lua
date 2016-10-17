@@ -37,9 +37,9 @@ function Bullet:hit()
     local dis_foot_point = vec_to_enemy:dot(self.direction)
     if dis_foot_point > 0 then
       local min_dis = (vec_to_enemy:lenSqr() - dis_foot_point ^ 2) ^ 0.5
-      if min_dis < enemy.size / 2 then
+      if min_dis < enemy.size then
         local foot_point = self.pre_pos + dis_foot_point * self.direction
-        local off_set = ((enemy.size / 2) ^ 2 - min_dis ^ 2) ^ 0.5
+        local off_set = (enemy.size ^ 2 - min_dis ^ 2) ^ 0.5
         local bound_point = foot_point - self.direction * off_set
         if (bound_point - self.pos):dot(self.direction) <= 0 then
           self.pos = bound_point

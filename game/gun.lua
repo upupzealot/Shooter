@@ -6,7 +6,7 @@ local default_option = {
   interval = 1,       -- 射击间隔
   reload = 1.5,       -- 换弹间隔
   scattering = 0,     -- 准星抖动
-  bullet_speed = 200  --子弹速度
+  bullet_speed = 1800  --子弹速度
 }
 
 function Gun:init(owner, option)
@@ -86,7 +86,8 @@ function Gun:getBullet()
   return GunBullet(self)
 end
 
-function Gun:recycle(bullet) -- 这里仍需要移动元素，可以优化 --同时还需要从World中移除
+function Gun:recycle(bullet) -- 这里仍需要移动元素，可以优化
   bullet.active = false
+  bullet.world:removeActor(bullet)
   table.insert(self.pool, bullet)
 end
