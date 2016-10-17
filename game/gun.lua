@@ -4,9 +4,9 @@ local default_option = {
   cap = 30,           -- 弹夹容量
   clip = 30,          -- 当前装弹量
   interval = 1,       -- 射击间隔
-  reload = 1.5,       -- 换弹间隔
+  reload = 5,       -- 换弹间隔
   scattering = 0,     -- 准星抖动
-  bullet_speed = 1800  --子弹速度
+  bullet_speed = 200  --子弹速度
 }
 
 function Gun:init(owner, option)
@@ -61,15 +61,15 @@ function Gun:processReload(dt)
 end
 
 function Gun:shoot()
-  local bullet = self:_getBullet()
+  local bullet = self:getBullet()
   bullet:config(self)
   self:config(bullet)
   self.owner.world:addActor(bullet)
 end
 
-function Gun:_getBullet()
+function Gun:getBullet()
   if #self.pool == 0 then
-    return self:getBullet()
+    return self:generateBullet()
   else
     return table.remove(self.pool)
   end
@@ -81,9 +81,9 @@ function Gun:config(bullet)
   bullet.v = bullet.direction * self.bullet_speed
 end
 
-function Gun:getBullet()
-  --return Bullet(self)
-  return GunBullet(self)
+function Gun:generateBullet()
+  return Bullet(self)
+  --return GunBullet(self)
 end
 
 function Gun:recycle(bullet) -- 这里仍需要移动元素，可以优化

@@ -60,6 +60,5 @@ end
 
 function Bullet:render()
   local pos = self.pos
-  --love.graphics.ellipse('fill', pos.x, pos.y, 5, 5, 5)
-  love.graphics.arc('fill', pos.x, pos.y, 5, 0, 2 * math.pi)
+  love.graphics.ellipse('fill', pos.x, pos.y, 5, 5, 12)
 end

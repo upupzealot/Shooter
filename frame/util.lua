@@ -1,10 +1,10 @@
 printt = function (t)
   print('{')
-  for k, v in ipairs(t) do
+  for k, v in pairs(t) do
     if type(v) == 'table' then
       print('  '..k..' = {...}')
     else
-      print('  '..k..' = '..v)
+      print('  '..k..' = '..tostring(v))
     end
   end
   print('}')
