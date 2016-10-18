@@ -11,8 +11,13 @@ require('frame/game_thread')
 --require('frame/world_test')
 
 require('game/explode')
+
+require('game/gun/gun')
+require('game/gun/pistol')
+require('game/gun/machine_gun')
+require('game/gun/shot_gun')
+
 require('game/character')
-require('game/gun')
 require('game/bullet')
 require('game/GunBullet')
 require('game/player')

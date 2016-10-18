@@ -1,12 +1,12 @@
 Gun = class('Gun')
 
 local default_option = {
-  cap = 30,           -- 弹夹容量
-  clip = 30,          -- 当前装弹量
-  interval = 1,       -- 射击间隔
-  reload = 5,       -- 换弹间隔
-  scattering = 0,     -- 准星抖动
-  bullet_speed = 1800  --子弹速度
+  cap = 30,             -- 弹夹容量
+  clip = 30,            -- 当前装弹量
+  interval = 1,         -- 射击间隔
+  reload = 5,           -- 换弹间隔
+  scattering = 0,       -- 准星抖动
+  bullet_speed = 1800   --子弹速度
 }
 
 function Gun:init(owner, option)
@@ -37,16 +37,21 @@ end
 function Gun:processShoot(dt)
   if not self.aim_pos then return end
   
-  self.shoot_count = self.shoot_count + dt
-  if self.shoot_count > self.interval then
-    self.shoot_count = self.shoot_count - self.interval
-    self.shoot_count = math.min(self.shoot_count, self.interval / 2)
-    self:shoot()
-    
-    self.clip = self.clip - 1
-    if self.clip == 0 then
-      self.can_shoot = false
-      self.reload_count = self.reload_count
+  if self.shoot_count < self.interval then
+    self.shoot_count = self.shoot_count + dt
+  end
+  
+  if self.shoot_count >= self.interval then
+    if love.mouse.isDown(1) then
+      self.shoot_count = self.shoot_count - self.interval
+      self.shoot_count = math.min(self.shoot_count, self.interval / 2)
+      self:shoot()
+      
+      self.clip = self.clip - 1
+      if self.clip == 0 then
+        self.can_shoot = false
+        self.reload_count = self.reload_count
+      end
     end
   end
 end

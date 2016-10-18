@@ -3,18 +3,14 @@ Player = class(Character, "Player")
 function Player:init(pos)
   Character.init(self, pos)
   
-  self.gun = Gun(self)
+  -- self.gun = Gun(self)
   -- self.gun = Pistol(self)
-  -- self.gun = ShotGun(self)
-  -- self.gun = MachineGun(self)
+  self.gun = ShotGun(self)
+  --self.gun = MachineGun(self)
 end
 
 function Player:update(dt)
-  if not love.mouse.isDown(1) then
-    return -- not touched yet
-  else
-    self:shoot(dt)
-  end 
+  self:shoot(dt)
 end
 
 
