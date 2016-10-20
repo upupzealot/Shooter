@@ -18,7 +18,8 @@ require('game/gun/machine_gun')
 require('game/gun/shot_gun')
 
 require('game/character')
-require('game/bullet')
-require('game/GunBullet')
+
+require('game/bullet/bullet')
+require('game/bullet/gun_bullet')
 require('game/player')
 require('game/enemy')
