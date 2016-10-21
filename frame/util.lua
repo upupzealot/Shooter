@@ -23,3 +23,14 @@ scopy = function (dst, src)
 
   return dst
 end
+
+-- 正负号
+math.sign = function (num)
+  if num > 0 then
+    return 1
+  elseif num < 0 then
+    return -1
+  else
+    return 0
+  end
+end

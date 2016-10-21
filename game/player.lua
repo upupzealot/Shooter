@@ -4,9 +4,10 @@ function Player:init(pos)
   Character.init(self, pos)
   
   -- self.gun = Gun(self)
-  -- self.gun = Pistol(self)
-  self.gun = ShotGun(self)
+  --self.gun = Pistol(self)
+  --self.gun = ShotGun(self)
   --self.gun = MachineGun(self)
+  self.gun = MissleGun(self)
 end
 
 function Player:update(dt)
