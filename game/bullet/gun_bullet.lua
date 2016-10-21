@@ -29,7 +29,7 @@ end
 
 function GunBullet:update(dt)
   if not self.finished then
-    local pos = self.pos + self.v * dt
+    local pos = self.pos + self.direction * self.speed * dt
     self.pos = pos
     
     self:hit()
@@ -41,7 +41,7 @@ function GunBullet:update(dt)
       self:recycle()
     end
   else
-    self.head_alpha = self.head_alpha - (self.v:len() * dt / self.max_length) * 255
+    self.head_alpha = self.head_alpha - (self.speed * dt / self.max_length) * 255
     if self.head_alpha <= 0 then
       self:recycle()
     end

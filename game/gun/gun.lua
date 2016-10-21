@@ -6,7 +6,7 @@ local default_option = {
   interval = 1,         -- 射击间隔
   reload = 5,           -- 换弹间隔
   scattering = 0,       -- 准星抖动
-  bullet_speed = 1800   --子弹速度
+  bullet_speed = 1800   -- 子弹速度
 }
 
 function Gun:init(owner, option)
@@ -83,7 +83,7 @@ end
 function Gun:config(bullet)
   bullet.direction = bullet.direction:rotate(math.rad((-0.5 + math.random()) * self.scattering))
   
-  bullet.v = bullet.direction * self.bullet_speed
+  bullet.speed = self.bullet_speed
 end
 
 function Gun:generateBullet()

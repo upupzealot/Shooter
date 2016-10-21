@@ -20,9 +20,9 @@ end
 
 function ShotGun:config(bullet)
   Gun.config(self, bullet)
-  bullet.v = bullet.v * (0.9 + math.random() * 0.2) 
+  bullet.speed = bullet.speed * (0.9 + math.random() * 0.2) 
 end
 
-function ShotGun:getBullet()
+function ShotGun:generateBullet()
   return GunBullet(self)
 end

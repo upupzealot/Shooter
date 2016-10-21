@@ -20,7 +20,7 @@ end
 
 function Bullet:update(dt)
   self.pre_pos = self.pos
-  local pos = self.pos + self.v * dt
+  local pos = self.pos + self.direction * self.speed * dt
   self.pos = pos
     
   self:hit()

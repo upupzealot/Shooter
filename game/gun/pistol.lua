@@ -11,6 +11,6 @@ function Pistol:init(owner)
   Gun.init(self, owner, option)
 end
 
-function Pistol:getBullet()
+function Pistol:generateBullet()
   return GunBullet(self)
 end
