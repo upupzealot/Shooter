@@ -29,6 +29,7 @@ end
 
 function GunBullet:update(dt)
   if not self.finished then
+    self.pre_pos = self.pos
     local pos = self.pos + self.direction * self.speed * dt
     self.pos = pos
     
