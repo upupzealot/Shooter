@@ -41,7 +41,7 @@ function GunBullet:update(dt)
     or (pos.y > HEIGHT and self.tail_pos.y > HEIGHT) then
       self:recycle()
     end
-  else
+  else -- self.finished == true
     self.head_alpha = self.head_alpha - (self.speed * dt / self.max_length) * 255
     if self.head_alpha <= 0 then
       self:recycle()
