@@ -27,27 +27,28 @@ function GunBullet:config(gun)
   self.head_alpha = 255
 end
 
-function GunBullet:update(dt)
-  if not self.finished then
-    self.pre_pos = self.pos
-    local pos = self.pos + self.direction * self.speed * dt
-    self.pos = pos
-    
-    self:hit()
-    
-    if (pos.x < 0 and self.tail_pos.x < 0)
-    or (pos.x > WIDTH and self.tail_pos.x > WIDTH)
-    or (pos.y < 0 and self.tail_pos.y < 0)
-    or (pos.y > HEIGHT and self.tail_pos.y > HEIGHT) then
-      self:recycle()
-    end
-  else -- self.finished == true
-    self.head_alpha = self.head_alpha - (self.speed * dt / self.max_length) * 255
-    if self.head_alpha <= 0 then
-      self:recycle()
-    end
-  end
-  
+function Unit:isOutOfBound()
+  local pos = self.pos
+  return (pos.x < 0 and self.tail_pos.x < 0)
+      or (pos.x > WIDTH and self.tail_pos.x > WIDTH)
+      or (pos.y < 0 and self.tail_pos.y < 0)
+      or (pos.y > HEIGHT and self.tail_pos.y > HEIGHT)
+end
+
+function GunBullet:onHit()
+  self.world:addActor(Explode(self.pos))
+  self.finished = true
+end
+
+function GunBullet:finishedAct(dt)
+  self.head_alpha = self.head_alpha - (self.speed * dt / self.max_length) * 255
+end
+
+function GunBullet:isDone()
+  return self.head_alpha <= 0
+end
+
+function GunBullet:always(dt)
   local dis = self.pos:dist(self.tail_pos)
   if not self.finished then -- 距离决定tail_alpha
     dis = math.min(dis, self.max_length)
@@ -58,11 +59,6 @@ function GunBullet:update(dt)
   self.length = dis
   self.tail_pos = self.pos - self.direction * dis
   self.tail_alpha = self.head_alpha - dis / self.max_length * 255
-end
-
-function GunBullet:onHit()
-  self.world:addActor(Explode(self.pos))
-  self.finished = true
 end
 
 function GunBullet:getVertices()

@@ -10,7 +10,10 @@ require('frame/actor')
 require('frame/game_thread')
 --require('frame/world_test')
 
+require('game/unit')
+
 require('game/navigator/navigator')
+require('game/mover/mover')
 
 require('game/explode')
 
@@ -25,5 +28,6 @@ require('game/character')
 require('game/bullet/bullet')
 require('game/bullet/gun_bullet')
 require('game/bullet/missle')
+
 require('game/player')
 require('game/enemy')

@@ -1,4 +1,4 @@
-Bullet = class(Actor, 'Bullet')
+Bullet = class(Unit, 'Bullet')
 
 Bullet.mesh = nil
 
@@ -7,6 +7,7 @@ function Bullet:init(gun)
   
   self.gun = gun
   self.color = gun.owner.color
+  self.mover = Mover(self)
 end
 
 function Bullet:config(gun)
@@ -16,21 +17,14 @@ function Bullet:config(gun)
   self.pre_pos = self.pos - self.direction
   
   self.active = true
+  self.finished = false
 end
 
-function Bullet:update(dt)
-  self.pre_pos = self.pos
-  local pos = self.pos + self.direction * self.speed * dt
-  self.pos = pos
-    
+function Bullet:act(dt)
   self:hit()
-    
-  if pos.x < 0 or pos.x > WIDTH or pos.y < 0 or pos.y > HEIGHT then
-    self:recycle()
-  end
 end
 
-function Bullet:hit()
+function Bullet:hit() -- TODO 这里还需要考虑多个目标先击中哪个
   local enemies = self.world:getActors('Enemy')
   for i, enemy in ipairs(enemies) do
     local vec_to_enemy = enemy.pos - self.pre_pos
@@ -51,14 +45,14 @@ function Bullet:hit()
 end
 
 function Bullet:onHit(enemy)
-  self:recycle()
+  self.finished = true
 end
 
 function Bullet:recycle()
   self.gun:recycle(self)
 end
 
-function Bullet:render()
+function Bullet:draw()
   local pos = self.pos
   love.graphics.ellipse('fill', pos.x, pos.y, 5, 5, 12)
 end

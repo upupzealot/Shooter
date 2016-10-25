@@ -7,6 +7,7 @@ function Missle:init(gun)
   
   self.navigator = Navigator(self)
   self.av = math.pi / 1.7
+  self.mover = Mover(self)
 
   local ps = love.graphics.newParticleSystem(img, 32)
   ps:setParticleLifetime(.3)
@@ -16,28 +17,16 @@ function Missle:init(gun)
   self.ps = ps
 end
 
-function Missle:update(dt)
-  if not self.finished then
-    self.navigator:navigate(dt)
+function Missle:config(gun)
+  Bullet.config(self, gun)
+  self.finished = false
+  self.ps:reset()
+  self.ps:start(64)
+end
 
-    self.pre_pos = self.pos
-    local pos = self.pos + self.direction * self.speed * dt
-    self.pos = pos
-    
-    self:hit()
-    
-    if pos.x < 0 or pos.x > WIDTH or pos.y < 0 or pos.y > HEIGHT then
-      self.finished = true
-      self.ps:stop()
-    end
-  else -- self.finished == true
-    if self.ps:getCount() == 0 then
-      self:recycle()
-    end
-  end
-  
-  self.ps:setPosition(self.pos.x, self.pos.y)
-  self.ps:update(dt)
+function Missle:onOutOfBound()
+  self.finished = true
+  self.ps:stop()
 end
 
 function Missle:onHit()
@@ -46,14 +35,16 @@ function Missle:onHit()
   self.ps:stop()
 end
 
-function Missle:render()
-  --Bullet.render(self)
-  love.graphics.draw(self.ps, 0, 0)
+function Missle:isDone()
+  return self.ps:getCount() == 0
 end
 
-function Missle:config(gun)
-  Bullet.config(self, gun)
-  self.finished = false
-  self.ps:reset()
-  self.ps:start(64)
+function Missle:always(dt)
+  self.ps:setPosition(self.pos.x, self.pos.y)
+  self.ps:update(dt)
+end
+
+function Missle:draw()
+  --Bullet.draw(self)
+  love.graphics.draw(self.ps, 0, 0)
 end
