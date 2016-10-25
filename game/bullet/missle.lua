@@ -1,6 +1,6 @@
 Missle = class(Bullet, 'Missle')
 
-local img=love.graphics.newImage("missle-tail.png")
+local img=love.graphics.newImage("plasma.png")
 
 function Missle:init(gun)
   Bullet.init(self, gun)
