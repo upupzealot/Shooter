@@ -40,8 +40,16 @@ function GunBullet:onHit()
   self.finished = true
 end
 
+function GunBullet:act(dt)
+  Bullet.act(self, dt)
+  self.length = self.pos:dist(self.tail_pos)
+  self.length = math.min(self.length, self.max_length)
+end
+
 function GunBullet:finishedAct(dt)
   self.head_alpha = self.head_alpha - (self.speed * dt / self.max_length) * 255
+  local alpha_dis = self.head_alpha / 255 * self.max_length
+  self.length = math.min(self.length, alpha_dis)
 end
 
 function GunBullet:isDone()
@@ -49,16 +57,8 @@ function GunBullet:isDone()
 end
 
 function GunBullet:always(dt)
-  local dis = self.pos:dist(self.tail_pos)
-  if not self.finished then -- 距离决定tail_alpha
-    dis = math.min(dis, self.max_length)
-  else -- finished head_alpha 决定最大距离
-    local alpha_dis = self.head_alpha / 255 * self.max_length
-    dis = math.min(dis, alpha_dis)
-  end
-  self.length = dis
-  self.tail_pos = self.pos - self.direction * dis
-  self.tail_alpha = self.head_alpha - dis / self.max_length * 255
+  self.tail_pos = self.pos - self.direction * self.length
+  self.tail_alpha = self.head_alpha - self.length / self.max_length * 255
 end
 
 function GunBullet:getVertices()
