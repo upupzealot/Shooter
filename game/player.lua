@@ -8,6 +8,7 @@ function Player:init(pos)
   --self.gun = ShotGun(self)
   --self.gun = MachineGun(self)
   self.gun = MissleGun(self)
+  --self.gun = PlasmaGun(self)
 end
 
 function Player:act(dt)

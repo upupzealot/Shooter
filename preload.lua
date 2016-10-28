@@ -22,12 +22,14 @@ require('game/gun/pistol')
 require('game/gun/machine_gun')
 require('game/gun/shot_gun')
 require('game/gun/missle_gun')
+require('game/gun/plasma_gun')
 
 require('game/character')
 
 require('game/bullet/bullet')
 require('game/bullet/gun_bullet')
 require('game/bullet/missle')
+require('game/bullet/plasma')
 
 require('game/player')
 require('game/enemy')
