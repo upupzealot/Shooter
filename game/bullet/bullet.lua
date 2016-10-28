@@ -27,19 +27,9 @@ end
 function Bullet:hit()
   local enemies = self.world:getActors('Enemy')
   local enemy, hit_point = self:raycast(enemies, self.direction)
-  if enemy then
-    if (hit_point - self.pos):dot(hit_point - self.pre_pos) <= 20 then
-      if (enemy.pos - self.pre_pos):len() < enemy.size then
-        printt(enemy.pos)
-        printt(self.pre_pre_pos)
-        printt(self.pre_pos)
-        printt(self.pre_direction)
-      end
-    end
-    if (hit_point - self.pos):dot(hit_point - self.pre_pos) <= 0 then
-      self.pos = hit_point
-      self:onHit(enemy)
-    end
+  if enemy and (hit_point - self.pos):dot(hit_point - self.pre_pos) <= 0 then
+    self.pos = hit_point
+    self:onHit(enemy)
   end
 end
 
