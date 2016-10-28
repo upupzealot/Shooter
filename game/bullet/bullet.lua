@@ -24,7 +24,7 @@ function Bullet:act(dt)
   self:hit()
 end
 
-function Bullet:hit() -- TODO 这里还需要考虑多个目标先击中哪个
+function Bullet:hit()
   local enemies = self.world:getActors('Enemy')
   local enemy, hit_point = self:raycast(enemies, self.direction)
   if enemy then
