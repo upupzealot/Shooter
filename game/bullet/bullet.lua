@@ -26,20 +26,19 @@ end
 
 function Bullet:hit() -- TODO 这里还需要考虑多个目标先击中哪个
   local enemies = self.world:getActors('Enemy')
-  for i, enemy in ipairs(enemies) do
-    local vec_to_enemy = enemy.pos - self.pre_pos
-    local dis_foot_point = vec_to_enemy:dot(self.direction)
-    if dis_foot_point > 0 then
-      local min_dis = (vec_to_enemy:lenSqr() - dis_foot_point ^ 2) ^ 0.5
-      if min_dis < enemy.size then
-        local foot_point = self.pre_pos + dis_foot_point * self.direction
-        local off_set = (enemy.size ^ 2 - min_dis ^ 2) ^ 0.5
-        local bound_point = foot_point - self.direction * off_set
-        if (bound_point - self.pos):dot(self.direction) <= 0 then
-          self.pos = bound_point
-          self:onHit(enemy)
-        end
+  local enemy, hit_point = self:raycast(enemies, self.direction)
+  if enemy then
+    if (hit_point - self.pos):dot(hit_point - self.pre_pos) <= 20 then
+      if (enemy.pos - self.pre_pos):len() < enemy.size then
+        printt(enemy.pos)
+        printt(self.pre_pre_pos)
+        printt(self.pre_pos)
+        printt(self.pre_direction)
       end
+    end
+    if (hit_point - self.pos):dot(hit_point - self.pre_pos) <= 0 then
+      self.pos = hit_point
+      self:onHit(enemy)
     end
   end
 end
