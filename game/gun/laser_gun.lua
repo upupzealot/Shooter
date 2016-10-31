@@ -6,17 +6,31 @@ function LaserGun:init(owner)
   GunContinuous.init(self, owner, option)
 end
 
-function GunContinuous:onFireStart()
-  print('fire start')
-  --TODO Override
+function LaserGun:onFireStart()
+  local laser = self:getBullet()
+  self.owner.world:addActor(laser)
+  self:shoot()
+  laser:update(0)
 end
 
-function GunContinuous:shoot(amount)
-  print('shoot'..self.clip)
-  --TODO Override
+function LaserGun:shoot()
+  local laser = self:getBullet()
+  laser:config(self)
+  self:config(laser)
 end
 
-function GunContinuous:onFireStop()
-  print('fire stop')
-  --TODO Override
+function LaserGun:onFireStop()
+  local laser = self:getBullet()
+  self.owner.world:removeActor(laser)
+end
+
+function LaserGun:getBullet()
+  if not self.laser then
+    self.laser = Laser(self)
+  end
+  return self.laser
+end
+
+function LaserGun:config(laser)
+  --laser.dps = laser.dps
 end

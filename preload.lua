@@ -32,6 +32,7 @@ require('game/bullet/bullet')
 require('game/bullet/gun_bullet')
 require('game/bullet/missle')
 require('game/bullet/plasma')
+require('game/bullet/laser')
 
 require('game/player')
 require('game/enemy')

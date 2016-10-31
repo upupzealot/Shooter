@@ -25,31 +25,28 @@ end
 function GunContinuous:processShoot(dt)
   if not self.aim_pos then return end
 
-  if self.clip > 0 then
-    if love.mouse.isDown(1) then
-      if not firing then
-        firing = true
-        if self.onFireStart then
-          self:onFireStart()
-        end
-      end
-
-      local amount = self.fire_per_sec * dt
-      amount = math.min(amount, self.clip)
-      self.clip = self.clip - amount
-      
-      self:shoot(amount)
-
-      if self.clip == 0 then
-        self.can_shoot = false
+  if self.clip > 0 and love.mouse.isDown(1) then
+    if not self.firing then
+      self.firing = true
+      if self.onFireStart then
+        self:onFireStart()
       end
     end
-  else
-    if firing then
-      firing = false
-      if self.onFireStop then
-        self:onFireStop()
-      end
+
+    local amount = self.fire_per_sec * dt
+    amount = math.min(amount, self.clip)
+    self.clip = self.clip - amount
+    
+    self:shoot(amount)
+  end
+
+  if self.clip == 0 or not love.mouse.isDown(1) then
+    if self.clip == 0 then
+      self.can_shoot = false
+    end
+    self.firing = false
+    if self.onFireStop then
+      self:onFireStop()
     end
   end
 end
