@@ -39,7 +39,7 @@ function zset:init()
 
   local mt = {}
   function mt:__newindex( i, k )
-    error("index set no longer supported. use 'add' adn 'remove' function instead.")
+    error("index set no longer supported. use 'add' and 'remove' function instead.")
   end
   setmetatable(self, mt);
 end
