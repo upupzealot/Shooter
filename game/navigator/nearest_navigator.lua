@@ -16,7 +16,7 @@ function NearestNavigator:navigate(dt)
   local units = owner.world:getActors(self.target_class)
   if units and #units > 0 then
     table.sort(units, function(a, b)
-      return a:dist(owner.pos) - b:dist(owner.pos)
+      return a.pos:dist(owner.pos) < b.pos:dist(owner.pos)
     end)
     local unit = units[1]
 

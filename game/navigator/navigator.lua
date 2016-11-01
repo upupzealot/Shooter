@@ -15,7 +15,7 @@ function Navigator:navigate(dt)
   local emenies = owner.world:getActors('Enemy')
   if emenies and #emenies > 0 then
     table.sort(emenies, function(a, b)
-      return a:dist(owner.pos) - b:dist(owner.pos)
+      return a.pos:dist(owner.pos) < b.pos:dist(owner.pos)
     end)
     local enemy = emenies[1]
 

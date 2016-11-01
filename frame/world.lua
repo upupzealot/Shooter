@@ -44,7 +44,12 @@ end
 
 -- 获取场景中制定类型的 Actor 对象
 function World:getActors(classname)
-  return self.actors[classname] or {}
+  local actors = self.actors[classname]
+  if actors then
+    return scopy(self.actors[classname])
+  else
+    return {}
+  end
 end
 
 -- 移除场景中的游戏对象
