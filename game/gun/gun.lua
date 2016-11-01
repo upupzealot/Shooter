@@ -27,6 +27,7 @@ end
 function Gun:aim(dt)
   if self.aimer then
     self.pos = self.owner.pos
+    self.world = self.owner.world
     self.aimer:navigate(dt)
   end
 end
