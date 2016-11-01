@@ -82,6 +82,9 @@ function Unit:raycast(units, direction)
   end
   for i, unit in ipairs(units) do
     local vec_to_unit = unit.pos - self.pre_pos
+    if vec_to_unit:len() < unit.size then
+      return unit, self.pre_pos
+    end
     local dis_foot_point = vec_to_unit:dot(direction)
     if dis_foot_point > 0 then
       local min_dis = sqrt_sub(vec_to_unit:len(), dis_foot_point)

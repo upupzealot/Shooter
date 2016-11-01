@@ -12,6 +12,14 @@ end
 
 -- 浅复制
 scopy = function (dst, src)
+  if not dst then
+    if not src then
+      return dst
+    else
+      dst = {}
+    end
+  end
+
   if not src then
     src = dst
     dst = {}
