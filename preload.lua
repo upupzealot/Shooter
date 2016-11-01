@@ -13,6 +13,8 @@ require('frame/game_thread')
 require('game/unit')
 
 require('game/navigator/navigator')
+require('game/navigator/keyboard_navigator')
+require('game/navigator/towards_mouse_navigator')
 require('game/mover/mover')
 
 require('game/explode')

@@ -24,19 +24,14 @@ function Gun:init(owner, option)
   self.reload_count = self.reload
 end
 
-function Gun:aim(aim_pos)
-  if self.aim_pos == self.owner.pos then
-    self.aim_pos = nil
-    return
+function Gun:aim(dt)
+  if self.aimer then
+    self.pos = self.owner.pos
+    self.aimer:navigate(dt)
   end
-  
-  self.aim_pos = aim_pos
-  self.direction = (self.aim_pos - self.owner.pos):normalize()
 end
 
 function Gun:processShoot(dt)
-  if not self.aim_pos then return end
-  
   if self.shoot_count < self.interval then
     self.shoot_count = self.shoot_count + dt
   end

@@ -10,6 +10,12 @@ function Player:init(pos)
   --self.gun = MissleGun(self)
   --self.gun = PlasmaGun(self)
   self.gun = LaserGun(self)
+  self.gun.aimer = TowardsMouseNavigator(self.gun)
+
+  self.navigator = KeyboardNavigator(self)
+  self.speed = 100
+  self.direction = vec2(0, 0)
+  self.mover = Mover(self)
 end
 
 function Player:act(dt)
@@ -20,8 +26,7 @@ end
 function Player:shoot(dt)
   local gun = self.gun
   
-  local aim_pos = vec2(love.mouse.getX(), love.mouse.getY())
-  gun:aim(aim_pos)
+  gun:aim()
   
   if gun.can_shoot then
     gun:processShoot(dt)

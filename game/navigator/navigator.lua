@@ -1,6 +1,11 @@
 Navigator = class('Navigator')
 
+local default_option = {
+  nav_key = 'direction'
+}
+
 function Navigator:init(owner, option)
+  scopy(self, default_option)
   scopy(self, option)
   self.owner = owner
 end
@@ -14,16 +19,16 @@ function Navigator:navigate(dt)
     end)
     local enemy = emenies[1]
 
-    local direction = owner.direction
+    local direction = owner[self.nav_key]
     local aim_direction = enemy.pos - owner.pos
 
     local sign = math.sign(direction:cross(aim_direction))
     local new_direction = direction:rotate(owner.av * dt * sign)
     
     if math.sign(new_direction:cross(aim_direction)) ~= sign then
-      owner.direction = aim_direction:normalize()
+      owner[self.nav_key] = aim_direction:normalize()
     else
-      owner.direction = new_direction
+      owner[self.nav_key] = new_direction
     end
   end
 end

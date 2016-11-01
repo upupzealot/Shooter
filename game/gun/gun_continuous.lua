@@ -23,8 +23,6 @@ function GunContinuous:init(owner, option)
 end
 
 function GunContinuous:processShoot(dt)
-  if not self.aim_pos then return end
-
   if self.clip > 0 and love.mouse.isDown(1) then
     if not self.firing then
       self.firing = true
