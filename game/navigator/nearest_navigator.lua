@@ -6,8 +6,8 @@ local default_option = {
 }
 
 function NearestNavigator:init(owner, option)
-  scopy(self, default_option)
-  scopy(self, option)
+  local opt = scopy(default_option)
+  scopy(opt, option)
   Navigator.init(self, owner, opt)
 end
 

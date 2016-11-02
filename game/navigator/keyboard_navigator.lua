@@ -8,8 +8,8 @@ local default_option = {
 }
 
 function KeyboardNavigator:init(owner, option)
-  opt = scopy(default_option)
-  opt = scopy(opt, option)
+  local opt = scopy(default_option)
+  scopy(opt, option)
   Navigator.init(self, owner, opt)
 end
 
