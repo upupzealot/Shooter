@@ -11,20 +11,9 @@ function EquipotentialNavigator:navigate(dt)
   local units = owner.world:getActors(self.target_class)
 
   if self.filters and #self.filters > 0 then
-    local filtered_units = {}
-    for i, unit in ipairs(units) do
-      local pass = true
-      for j, filter in self.filters do
-        pass = pass and filter:filt(unit)
-        if not pass then
-          break
-        end
-      end
-      if pass then
-        table.insert(filtered_units, unit)
-      end
+    for i, filter in ipairs(self.filters) do
+      units = filter:filt(units)
     end
-    units = filtered_units
   end
 
   if units and #units > 0 then
