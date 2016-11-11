@@ -23,11 +23,11 @@ function NearestNavigator:navigate(dt)
     local direction = (unit.pos - owner.pos):normalize()
     
     if direction_type == 'backward' then
-      return -direction
+      self.direction = -direction
     else
-      return direction
+      self.direction = direction
     end
   else
-    return vec2(0, 0)
+    self.direction = vec2(0, 0)
   end
 end

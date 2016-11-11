@@ -1,7 +1,8 @@
 Navigator = class('Navigator')
 
 local default_option = {
-  weight = 1
+  weight = 1,
+  direction = vec2(0, 0)
 }
 
 function Navigator:init(owner, option)
@@ -11,7 +12,7 @@ function Navigator:init(owner, option)
 end
 
 function Navigator:update(dt)
-  local direction = self:navigate(dt)
+  self:navigate(dt)
   if self.nav_key then
     self.owner[self.nav_key] = direction
   end
@@ -33,11 +34,11 @@ function Navigator:navigate(dt)
     local new_direction = direction:rotate(owner.av * dt * sign)
     
     if math.sign(new_direction:cross(aim_direction)) ~= sign then
-      return aim_direction:normalize()
+      self.direction = aim_direction:normalize()
     else
-      return new_direction
+      self.direction = new_direction
     end
   else
-    return vec2(0, 0)
+    self.direction = vec2(0, 0)
   end
 end

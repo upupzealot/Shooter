@@ -5,9 +5,10 @@ function GroupNavigator:navigate(dt)
 
   if self.navigators and #self.navigators > 0 then
     for i, navigator in ipairs(self.navigators) do
-      result_direction = result_direction + navigator:navigate(dt) * navigator.weight
+      navigator:navigate(dt)
+      result_direction = result_direction + navigator.direction * navigator.weight
     end
   end
 
-  return result_direction
+  self.direction = result_direction
 end

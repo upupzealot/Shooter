@@ -29,6 +29,7 @@ function Gun:aim(dt)
     self.pos = self.owner.pos
     self.world = self.owner.world
     self.aimer:update(dt)
+    self.direction = self.aimer.direction
   end
 end
 

@@ -37,8 +37,8 @@ function KeyboardNavigator:navigate(dt)
 
   local owner = self.owner
   if direction ~= KeyboardNavigator.ZERO and direction:len() ~= 1 then
-    return direction:normalize()
+    self.direction = direction:normalize()
   else
-    return direction
+    self.direction = direction
   end
 end

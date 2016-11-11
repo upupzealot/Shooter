@@ -24,9 +24,9 @@ function EquipotentialNavigator:navigate(dt)
         result_direction = result_direction + unit_2_owner
       end
     end
-    return result_direction
+    self.direction = result_direction
   else
-    return vec2(0, 0)
+    self.direction = vec2(0, 0)
   end
 end
 
