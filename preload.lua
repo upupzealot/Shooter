@@ -12,10 +12,15 @@ require('frame/game_thread')
 
 require('game/unit')
 
+require('game/unit_filter/filter')
+require('game/unit_filter/distance_filter')
+
 require('game/navigator/navigator')
 require('game/navigator/nearest_navigator')
 require('game/navigator/keyboard_navigator')
 require('game/navigator/towards_mouse_navigator')
+require('game/navigator/equipotential_navigator')
+require('game/navigator/group_navigator')
 require('game/mover/mover')
 
 require('game/explode')

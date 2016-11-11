@@ -1,10 +1,6 @@
 EquipotentialNavigator = class(Navigator, 'EquipotentialNavigator')
 
-function EquipotentialNavigator:init(owner, option)
-  local opt = scopy(default_option)
-  scopy(opt, option)
-  Navigator.init(self, owner, opt)
-end
+EquipotentialNavigator.ZERO = vec2(0, 0)
 
 function EquipotentialNavigator:navigate(dt)
   local owner = self.owner
@@ -19,9 +15,14 @@ function EquipotentialNavigator:navigate(dt)
   if units and #units > 0 then
     local result_direction = vec2(0, 0)
     for i, unit in ipairs(units) do
-      local vec = self.owner.pos - unit.pos
-      vec = (unit_2_owner):normalize() * self.calcWeight(unit_2_owner:len())
-      result_direction = result_direction + vec
+      if unit ~= self then
+        local unit_2_owner = self.owner.pos - unit.pos
+        if unit_2_owner ~= EquipotentialNavigator.ZERO then
+          unit_2_owner = unit_2_owner:normalize()
+        end
+        unit_2_owner = unit_2_owner * self:calcWeight(unit_2_owner:len())
+        result_direction = result_direction + unit_2_owner
+      end
     end
     return result_direction
   else

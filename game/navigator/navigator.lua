@@ -1,13 +1,20 @@
 Navigator = class('Navigator')
 
 local default_option = {
-  nav_key = 'direction'
+  weight = 1
 }
 
 function Navigator:init(owner, option)
   scopy(self, default_option)
   scopy(self, option)
   self.owner = owner
+end
+
+function Navigator:update(dt)
+  local direction = self:navigate(dt)
+  if self.nav_key then
+    self.owner[self.nav_key] = direction
+  end
 end
 
 function Navigator:navigate(dt)
@@ -26,9 +33,11 @@ function Navigator:navigate(dt)
     local new_direction = direction:rotate(owner.av * dt * sign)
     
     if math.sign(new_direction:cross(aim_direction)) ~= sign then
-      owner[self.nav_key] = aim_direction:normalize()
+      return aim_direction:normalize()
     else
-      owner[self.nav_key] = new_direction
+      return new_direction
     end
+  else
+    return vec2(0, 0)
   end
 end

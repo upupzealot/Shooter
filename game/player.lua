@@ -11,10 +11,10 @@ function Player:init(pos)
   --self.gun = PlasmaGun(self)
   self.gun = LaserGun(self)
   
-  --self.gun.aimer = TowardsMouseNavigator(self.gun)
-  self.gun.aimer = NearestNavigator(self.gun)
+  self.gun.aimer = TowardsMouseNavigator(self.gun, {nav_key = 'direction'})
+  --self.gun.aimer = NearestNavigator(self.gun)
 
-  self.navigator = KeyboardNavigator(self)
+  self.navigator = KeyboardNavigator(self, {nav_key = 'direction'})
   self.speed = 100
   self.direction = vec2(0, 0)
   self.mover = Mover(self)

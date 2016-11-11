@@ -5,7 +5,7 @@ local img=love.graphics.newImage("plasma.png")
 function Missle:init(gun)
   Bullet.init(self, gun)
   
-  self.navigator = Navigator(self)
+  self.navigator = Navigator(self, {nav_key = 'direction'})
   self.av = math.pi / 1.7
   self.mover = Mover(self)
 

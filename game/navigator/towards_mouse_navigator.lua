@@ -5,5 +5,5 @@ function TowardsMouseNavigator:navigate(dt)
   if mouse == self.owner.pos then
     return --self.owner[self.nav_key] = vec2(0, 0)
   end
-  self.owner[self.nav_key] = (mouse - self.owner.pos):normalize()
+  return (mouse - self.owner.pos):normalize()
 end

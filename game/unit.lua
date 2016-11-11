@@ -41,7 +41,7 @@ end
 
 function Unit:navigate(dt)
   if self.navigator then
-    self.navigator:navigate(dt)
+    self.navigator:update(dt)
   end
 end
 
