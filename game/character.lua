@@ -13,3 +13,7 @@ function Character:draw()
   love.graphics.ellipse('fill', self.pos.x, self.pos.y, self.size - 8, self.size - 8, 24)
   love.graphics.ellipse('line', self.pos.x, self.pos.y, self.size - 2, self.size - 2, 24)
 end
+
+function Character:onOutOfBound()
+  -- do nothing
+end
