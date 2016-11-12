@@ -1,5 +1,9 @@
 Unit = class(Actor, "Unit")
 
+function Unit:init(pos)
+  Actor.init(self, pos)
+end
+
 function Unit:render()
   love.graphics.push('all')
     if self.color then

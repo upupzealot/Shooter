@@ -3,7 +3,7 @@ Bullet = class(Unit, 'Bullet')
 Bullet.mesh = nil
 
 function Bullet:init(gun)
-  Actor.init(self, gun.owner.pos)
+  Unit.init(self, gun.owner.pos)
   
   self.gun = gun
   self.color = gun.owner.color

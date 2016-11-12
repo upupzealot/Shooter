@@ -27,7 +27,7 @@ function GunBullet:config(gun)
   self.head_alpha = 255
 end
 
-function Unit:isOutOfBound()
+function GunBullet:isOutOfBound()
   local pos = self.pos
   return (pos.x < 0 and self.tail_pos.x < 0)
       or (pos.x > WIDTH and self.tail_pos.x > WIDTH)
