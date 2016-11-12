@@ -16,12 +16,12 @@ function Enemy:init(pos)
         },
         max_dis = 30,
         min_dis = 0,
-        max_weight = 10,
-        min_weight = 0,
+        max_weight = 3,
+        min_weight = 1,
         pow = 2,
         weight = 10,
-        one_minus = false,
-        target_class = 'Enemy'
+        one_minus = true,
+        target_class = 'Character'
       }),
       NearestNavigator(self, {target_class = 'Player'})
     },

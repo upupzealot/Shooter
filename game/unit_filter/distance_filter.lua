@@ -5,6 +5,10 @@ function DistanceFilter:init(owner, option)
 end
 
 function DistanceFilter:pass(unit)
+  if unit == self then
+    return false
+  end
+
   if self.max_dis and self.owner.pos:dist(unit.pos) >= self.max_dis then
     return false
   end

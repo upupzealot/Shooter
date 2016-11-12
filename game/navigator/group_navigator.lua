@@ -1,5 +1,7 @@
 GroupNavigator = class(Navigator, 'GroupNavigator')
 
+GroupNavigator.ZERO = vec2(0, 0)
+
 function GroupNavigator:navigate(dt)
   local result_direction = vec2(0, 0)
 
@@ -10,5 +12,8 @@ function GroupNavigator:navigate(dt)
     end
   end
 
+  if result_direction ~= GroupNavigator.ZERO then
+    result_direction = result_direction:normalize()
+  end
   self.direction = result_direction
 end
