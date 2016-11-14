@@ -5,7 +5,7 @@ function DistanceFilter:init(owner, option)
 end
 
 function DistanceFilter:pass(unit)
-  if unit == self then
+  if unit == self.owner then
     return false
   end
 
