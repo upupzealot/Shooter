@@ -96,6 +96,15 @@ function vector:normalized()
   return self / self:len()
 end
 
+function vector:directionalize()
+  local l = self:len()
+  if l == 0 then
+    return self
+  else
+    return self / self:len()
+  end
+end
+
 --added for codea
 function vector:normalize()
   return self / self:len()

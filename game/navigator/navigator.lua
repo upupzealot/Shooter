@@ -34,7 +34,7 @@ function Navigator:navigate(dt)
     local new_direction = direction:rotate(owner.av * dt * sign)
     
     if math.sign(new_direction:cross(aim_direction)) ~= sign then
-      self.direction = aim_direction:normalize()
+      self.direction = aim_direction:directionalize()
     else
       self.direction = new_direction
     end

@@ -20,7 +20,7 @@ function NearestNavigator:navigate(dt)
     end)
     local unit = units[1]
 
-    local direction = (unit.pos - owner.pos):normalize()
+    local direction = (unit.pos - owner.pos):directionalize()
     
     if direction_type == 'backward' then
       self.direction = -direction

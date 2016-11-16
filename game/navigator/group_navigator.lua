@@ -11,9 +11,6 @@ function GroupNavigator:navigate(dt)
       result_direction = result_direction + navigator.direction * navigator.weight
     end
   end
-
-  if result_direction ~= GroupNavigator.ZERO then
-    result_direction = result_direction:normalize()
-  end
-  self.direction = result_direction
+  
+  self.direction = result_direction:directionalize()
 end

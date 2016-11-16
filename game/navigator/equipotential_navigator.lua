@@ -1,6 +1,14 @@
 EquipotentialNavigator = class(Navigator, 'EquipotentialNavigator')
 
-EquipotentialNavigator.ZERO = vec2(0, 0)
+function EquipotentialNavigator:init(owner, option)
+  Navigator.init(self, owner, option)
+  self.filters = {
+    DistanceFilter(owner, {
+      max_dis = option.max_dis,
+      min_dis = option.min_dis
+    })
+  }
+end
 
 function EquipotentialNavigator:navigate(dt)
   local owner = self.owner
@@ -15,14 +23,10 @@ function EquipotentialNavigator:navigate(dt)
   if units and #units > 0 then
     local result_direction = vec2(0, 0)
     for i, unit in ipairs(units) do
-      if unit ~= self then
-        local unit_2_owner = self.owner.pos - unit.pos
-        if unit_2_owner ~= EquipotentialNavigator.ZERO then
-          unit_2_owner = unit_2_owner:normalize()
-        end
-        unit_2_owner = unit_2_owner * self:calcWeight(unit_2_owner:len())
-        result_direction = result_direction + unit_2_owner
-      end
+      local unit_2_owner = self.owner.pos - unit.pos
+      local direction = unit_2_owner:directionalize()
+      direction = direction * self:calcWeight(unit_2_owner:len())
+      result_direction = result_direction + direction
     end
     self.direction = result_direction
   else
@@ -35,8 +39,5 @@ function EquipotentialNavigator:calcWeight(distance)
   distance = math.min(self.max_dis, distance)
   local dis_factor = (distance - self.min_dis) / (self.max_dis - self.min_dis)
   local weight_factor = dis_factor ^ self.pow
-  if self.one_minus then
-    weight_factor = 1 - weight_factor
-  end
   return self.min_weight + weight_factor * (self.max_weight - self.min_weight)
 end
