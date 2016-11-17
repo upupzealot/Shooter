@@ -15,6 +15,8 @@ function Missle:init(gun)
   ps:setColors(255, 255, 255, 255, 255, 255, 255, 0)
   ps:setEmissionRate(64)
   self.ps = ps
+
+  self.damage = 100
 end
 
 function Missle:config(gun)
@@ -29,9 +31,8 @@ function Missle:onOutOfBound()
   self.ps:stop()
 end
 
-function Missle:onHit()
-  self.world:addActor(Explode(self.pos))
-  self.finished = true
+function Missle:onHit(enemy)
+  Bullet.onHit(self, enemy)
   self.ps:stop()
 end
 

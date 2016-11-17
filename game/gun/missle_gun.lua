@@ -5,7 +5,8 @@ function MissleGun:init(owner)
     cap = 6,
     interval = 1.8,
     reload = 2.5,
-    bullet_speed = 200
+    bullet_speed = 200,
+    damage = 100
   }
   Gun.init(self, owner, option)
 end

@@ -13,6 +13,8 @@ function Plasma:init(gun)
   ps:setColors(255, 255, 255, 255, 255, 255, 255, 0)
   ps:setEmissionRate(64)
   self.ps = ps
+
+  self.damage = 100
 end
 
 function Plasma:config(gun)
@@ -27,9 +29,8 @@ function Plasma:onOutOfBound()
   self.ps:stop()
 end
 
-function Plasma:onHit()
-  self.world:addActor(Explode(self.pos))
-  self.finished = true
+function Plasma:onHit(enemy)
+  Bullet.onHit(self, enemy)
   self.ps:stop()
 end
 

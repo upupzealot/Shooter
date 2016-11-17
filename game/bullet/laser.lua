@@ -14,19 +14,26 @@ function Laser:config(gun)
   self.direction = gun.direction
 end
 
-function Laser:hit()
+function Laser:isOutOfBound()
+  return false
+end
+
+function Laser:hit(dt)
   local enemies = self.world:getActors('Enemy')
   local enemy, hit_point = self:raycast(enemies, self.direction)
   if enemy then
     self.endPoint = hit_point
-    self:onHit(enemy)
+    self:onHit(enemy, dt)
   else
     self.endPoint = self.pos + self.direction * 1000
   end
 end
 
-function Laser:onHit(enemy)
-  --TODO damage/reflect
+function Laser:onHit(enemy, dt)
+  enemy.hp = enemy.hp - self.dps * dt
+  if enemy.hp <= 0 then
+    enemy:dead()
+  end
 end
 
 function Laser:draw()

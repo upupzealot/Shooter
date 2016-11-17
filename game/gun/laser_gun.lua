@@ -1,7 +1,9 @@
 LaserGun = class(GunContinuous, 'LaserGun')
 
 function LaserGun:init(owner)
-  local option = {}
+  local option = {
+    dps = 200
+  }
 
   GunContinuous.init(self, owner, option)
 end
@@ -32,5 +34,5 @@ function LaserGun:getBullet()
 end
 
 function LaserGun:config(laser)
-  --laser.dps = laser.dps
+  laser.dps = self.dps
 end

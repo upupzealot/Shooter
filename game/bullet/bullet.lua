@@ -8,6 +8,8 @@ function Bullet:init(gun)
   self.gun = gun
   self.color = gun.owner.color
   self.mover = Mover(self)
+
+  self.damage = 35
 end
 
 function Bullet:config(gun)
@@ -21,20 +23,24 @@ function Bullet:config(gun)
 end
 
 function Bullet:act(dt)
-  self:hit()
+  self:hit(dt)
 end
 
-function Bullet:hit()
+function Bullet:hit(dt)
   local enemies = self.world:getActors('Enemy')
   local enemy, hit_point = self:raycast(enemies, self.direction)
   if enemy and (hit_point - self.pos):dot(hit_point - self.pre_pos) <= 0 then
     self.pos = hit_point
-    self:onHit(enemy)
+    self:onHit(enemy, dt)
   end
 end
 
-function Bullet:onHit(enemy)
+function Bullet:onHit(enemy, dt)
   self.finished = true
+  enemy.hp = enemy.hp - self.damage
+  if enemy.hp <= 0 then
+    enemy:dead()
+  end
 end
 
 function Bullet:recycle()

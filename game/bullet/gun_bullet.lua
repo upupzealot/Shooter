@@ -35,11 +35,6 @@ function GunBullet:isOutOfBound()
       or (pos.y > HEIGHT and self.tail_pos.y > HEIGHT)
 end
 
-function GunBullet:onHit()
-  self.world:addActor(Explode(self.pos))
-  self.finished = true
-end
-
 function GunBullet:act(dt)
   Bullet.act(self, dt)
   self.length = self.pos:dist(self.tail_pos)
